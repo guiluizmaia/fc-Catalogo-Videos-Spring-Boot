@@ -1,10 +1,13 @@
-package com.fullcycle.CatalogoVideos.domain;
+package com.fullcycle.CatalogoVideos.domain.entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.fullcycle.CatalogoVideos.domain.exception.DomainException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +17,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest()
 public class CategoryTests {
+
+    @Test
+    public void throwDomainExceptionWheNameIsNull(){
+        assertThrows(DomainException.class, () -> new Category(null, "Description"));
+    }
+
+    @Test
+    public void throwDomainExceptionWheNameIsBlank(){
+        assertThrows(DomainException.class, () -> new Category("", "Description"));
+    }
+
     @Test
     public void createCategoryWithNameAndDescriptionIsNull() throws Exception {
         final Category entity = new Category(
