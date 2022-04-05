@@ -1,8 +1,17 @@
 package com.fullcycle.CatalogoVideos.application.category;
 
+import com.fullcycle.CatalogoVideos.application.usecase.category.common.CategoryOutputData;
+import com.fullcycle.CatalogoVideos.application.usecase.category.create.CreateCategoryInputData;
 import com.fullcycle.CatalogoVideos.application.usecase.category.create.CreateCategoryUseCase;
+import com.fullcycle.CatalogoVideos.domain.entity.Category;
 import com.fullcycle.CatalogoVideos.domain.repository.ICategoryRepository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,9 +25,26 @@ public class CreateCategoryUseCaseTests {
 
     @Mock
     ICategoryRepository repository;
-    
+
+    @BeforeEach
+    void initUseCase () {
+        useCase = new CreateCategoryUseCase(repository);
+    }
     @Test
     public void executeReturnsCreatedCategory(){
+        Category category = new Category("Action", "Action Category");
 
+        when(repository.create(any(Category.class))).thenReturn(category);
+
+        CreateCategoryInputData input = new CreateCategoryInputData(
+            category.getName(),
+            category.getDescription(),
+            category.getIsActive()
+        );
+
+        CategoryOutputData actual = useCase.execute(input);
+        repository.create(category);
+
+        assertThat(actual.getName()).isEqualTo(category.getName());
     }
 }
