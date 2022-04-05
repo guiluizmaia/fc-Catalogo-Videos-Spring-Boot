@@ -2,6 +2,8 @@ package com.fullcycle.CatalogoVideos.application.usecase.category.common;
 
 import java.util.UUID;
 
+import com.fullcycle.CatalogoVideos.domain.entity.Category;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -12,4 +14,13 @@ public class CategoryOutputData {
     private String name;
     private String description;
     private Boolean isActive;
+
+    public static CategoryOutputData fromDomain(Category domain){
+        return new CategoryOutputData(
+            domain.getId(),
+            domain.getName(),
+            domain.getDescription(),
+            domain.getIsActive()
+        );
+    }
 }
