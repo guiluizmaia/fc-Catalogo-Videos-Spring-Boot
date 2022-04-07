@@ -22,9 +22,9 @@ public class CreateCategoryUseCase implements ICreateCategoryUseCase{
     private Category toDomain(CreateCategoryInputData input){
         return new Category(
             input.getName(),
-            input.getDescription,
-            input.getIsActive,
-        )
+            input.getDescription(),
+            input.getIsActive()
+        );
     }
     
 } 

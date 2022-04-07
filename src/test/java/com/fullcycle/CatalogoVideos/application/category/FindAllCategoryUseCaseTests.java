@@ -1,10 +1,10 @@
 package com.fullcycle.CatalogoVideos.application.category;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,8 +14,8 @@ import com.fullcycle.CatalogoVideos.application.usecase.category.findall.FindAll
 import com.fullcycle.CatalogoVideos.domain.entity.Category;
 import com.fullcycle.CatalogoVideos.domain.repository.ICategoryRepository;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -36,6 +36,7 @@ public class FindAllCategoryUseCaseTests {
     
     @Test
     public void executeReturnsFindAllCategory() {
+
         List<Category> categories = Arrays.asList(
             new Category(
                 "Action", 
@@ -58,7 +59,7 @@ public class FindAllCategoryUseCaseTests {
 
         // doReturn(categories).when(repository).findAll();
         List<CategoryOutputData> actual = useCase.execute();
-        repository.findAll();
+        // repository.findAll();
 
         assertThat(categories).isNotNull();
         assertThat(categories).hasSize(3);
