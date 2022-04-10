@@ -5,5 +5,5 @@ import java.util.UUID;
 import com.fullcycle.CatalogoVideos.application.usecase.category.common.CategoryOutputData;
 
 public interface IFindByIdCategoryUseCase {
-    CategoryOutputData execute(UUID id) throws Exception;
+    CategoryOutputData execute(UUID id);
 }

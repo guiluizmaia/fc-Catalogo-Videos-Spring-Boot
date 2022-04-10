@@ -30,7 +30,7 @@ public class FindByIdCategoryUseCaseTest {
     }
 
     @Test
-    public void executeReturnsFindByIdCategory() throws Exception {
+    public void executeReturnsFindByIdCategory() {
         Category category = new Category(
             "Action", 
             "Action Description",

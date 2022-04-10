@@ -2,6 +2,7 @@ package com.fullcycle.CatalogoVideos.application.usecase.category.update;
 
 import java.util.UUID;
 
+import com.fullcycle.CatalogoVideos.application.exception.NotFoundException;
 import com.fullcycle.CatalogoVideos.domain.entity.Category;
 import com.fullcycle.CatalogoVideos.domain.repository.ICategoryRepository;
 
@@ -17,7 +18,7 @@ public class UpdateCategoryUseCase implements IUpdateCategoryUseCase{
     @Override
     public void execute(UUID id, UpdateCategoryInputData input) {
         Category category = repository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Not found"));
+            .orElseThrow(() -> new NotFoundException("Category %s not found", id));
         
         category.update(
             input.getName(), 
