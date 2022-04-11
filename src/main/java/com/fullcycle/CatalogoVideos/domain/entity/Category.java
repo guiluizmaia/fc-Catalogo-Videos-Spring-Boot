@@ -33,6 +33,11 @@ public class Category {
         this.setDescription(description);
     }
 
+    public Category(String name) {
+        this.id = UUID.randomUUID();
+        this.setName(name);
+    }
+    
 
     public UUID getId() {
         return this.id;
