@@ -3,12 +3,16 @@ package com.fullcycle.CatalogoVideos.application.category;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
+import java.util.UUID;
 
+import com.fullcycle.CatalogoVideos.application.exception.NotFoundException;
 import com.fullcycle.CatalogoVideos.application.usecase.category.common.CategoryOutputData;
 import com.fullcycle.CatalogoVideos.application.usecase.category.get.FindByIdCategoryUseCase;
 import com.fullcycle.CatalogoVideos.domain.entity.Category;
 import com.fullcycle.CatalogoVideos.domain.repository.ICategoryRepository;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,5 +49,12 @@ public class FindByIdCategoryUseCaseTest {
 
         assertThat(category).isNotNull();
         assertThat(actual).isNotNull();
+    }
+
+    @Test
+    public void throwNotFoundExceptionWhenCategoryIsNotFound() {
+       assertThrows(NotFoundException.class, () -> {
+        useCase.execute(UUID.fromString("3a1542ef-83c0-4809-98bb-17e9307672c8"));
+       });
     }
 }
