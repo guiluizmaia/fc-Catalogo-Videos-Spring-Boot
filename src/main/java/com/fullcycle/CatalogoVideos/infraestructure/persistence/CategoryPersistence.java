@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fullcycle.CatalogoVideos.domain.entity.Category;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,4 +38,13 @@ public class CategoryPersistence {
 
     @Column
     private Boolean isActive = true;
+
+    public Category fromThis(){
+        return new Category(
+            getId(),
+            getName(),
+            getDescription(),
+            getIsActive()
+        );
+    }
 }

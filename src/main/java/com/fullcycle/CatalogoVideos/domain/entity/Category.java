@@ -17,6 +17,18 @@ public class Category {
         this.setDescription(description);
     }
 
+    public Category(UUID id, String name, String description, Boolean isActive) {
+        this.setId(id);
+        this.setName(name);
+        this.setDescription(description);
+        if(isActive){
+            this.active();
+        }else {
+            this.deactive();
+        }
+    }
+
+
     public Category(String name, String description, Boolean isActive) {
         this.setName(name);
         this.setDescription(description);
