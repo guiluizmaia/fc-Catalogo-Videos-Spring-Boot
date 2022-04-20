@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fullcycle.CatalogoVideos.domain.entity.Category;
+import com.fullcycle.CatalogoVideos.domain.exception.NotNullException;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,6 +39,18 @@ public class CategoryPersistence {
 
     @Column
     private Boolean isActive = true;
+
+    public static CategoryPersistence from(Category category) {
+        if (category == null){
+            throw new NotNullException();
+        }
+        return new CategoryPersistence(
+            category.getId(), 
+            category.getName(),
+            category.getDescription(),
+            category.getIsActive()
+        );
+    }
 
     public Category fromThis(){
         return new Category(
