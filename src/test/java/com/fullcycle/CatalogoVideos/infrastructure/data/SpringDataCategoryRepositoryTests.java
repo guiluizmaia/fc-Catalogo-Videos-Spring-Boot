@@ -1,29 +1,16 @@
 package com.fullcycle.CatalogoVideos.infrastructure.data;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.fullcycle.CatalogoVideos.domain.entity.Category;
 import com.fullcycle.CatalogoVideos.infraestructure.data.SpringDataCategoryRepository;
-import com.fullcycle.CatalogoVideos.infraestructure.mysql.MySQLCategoryRepositoryImpl;
 import com.fullcycle.CatalogoVideos.infraestructure.persistence.CategoryPersistence;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -40,6 +27,11 @@ public class SpringDataCategoryRepositoryTests {
     @Autowired
     private SpringDataCategoryRepository repository;
 
+    @BeforeEach
+    void initEach(){
+        repository.deleteAll();
+    }
+
     @Test
     public void saveCategory() {
         CategoryPersistence input = new CategoryPersistence();
@@ -54,5 +46,46 @@ public class SpringDataCategoryRepositoryTests {
         assertThat(actual.getIsActive()).isTrue();
     }
 
-    
+    @Test
+    public void findAllCategoriesAndReturnTwoCategories(){
+        CategoryPersistence entity1 = new CategoryPersistence();
+        entity1.setName("Action");
+        entity1.setDescription("Action Description");
+        entity1.setIsActive(true);
+
+        CategoryPersistence entity2 = new CategoryPersistence();
+        entity2.setName("Action");
+        entity2.setDescription("Action Description");
+        entity2.setIsActive(true);
+
+        repository.saveAll(Arrays.asList(entity1, entity2));
+
+        List<CategoryPersistence> actual = repository.findAll();
+
+        assertThat(actual).isNotNull();
+        assertThat(actual).hasSize(2);
+    }
+
+    @Test
+    public void findByIdCategory(){
+        CategoryPersistence entity = new CategoryPersistence();
+        entity.setName("Action");
+        entity.setDescription("Action Description");
+        entity.setIsActive(true);
+
+        CategoryPersistence saved = repository.save(entity);
+
+        Optional<CategoryPersistence> actual = repository.findById(entity.getId());
+
+        assertThat(actual.isPresent()).isTrue();
+        assertThat(actual).isNotNull();
+    }
+
+    @Test
+    public void findAllAndIsEmpty(){
+        List<CategoryPersistence> actual = repository.findAll();
+
+        assertThat(actual).isNotNull();
+        assertThat(actual).hasSize(0);
+    }
 }
