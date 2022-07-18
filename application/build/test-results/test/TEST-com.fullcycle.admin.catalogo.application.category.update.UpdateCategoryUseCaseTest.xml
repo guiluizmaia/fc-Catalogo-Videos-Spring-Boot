@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-07-17T18:31:02" hostname="GA78LMTS2f7bf81f5" time="0.848">
+<testsuite name="com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-07-18T17:56:21" hostname="GA78LMTS2f7bf81f5" time="0.493">
   <properties/>
-  <testcase name="givenAValidCommand_whenCallsUpdateCategory_shouldReturnCategoryId()" classname="com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryUseCaseTest" time="0.848"/>
+  <testcase name="givenACommandWithInvalidID_whenCallsUpdateCategory_shouldReturnNotFoundException()" classname="com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryUseCaseTest" time="0.493"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
